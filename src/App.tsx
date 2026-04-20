@@ -30,10 +30,10 @@ const DECAY_RATES = {
 };
 
 const STAT_LABELS = {
-  hunger: 'Gizi',
-  happiness: 'Ati',
-  cleanliness: 'Kinclong',
-  energy: 'Tenogo',
+  hunger: 'Nutrisi',
+  happiness: 'Kebahagiaan',
+  cleanliness: 'Kebersihan',
+  energy: 'Energi',
 };
 
 type PetStats = {
@@ -107,10 +107,10 @@ export default function App() {
   }, [isSleeping, isHardened]);
 
   useEffect(() => {
-    if (stats.hunger < 20) setMessage("Lapar niki... Tolong paringaken mineral.");
-    else if (stats.cleanliness < 20) setMessage("Awakku kotor... Tolong dipoles supados mengkilap.");
-    else if (stats.happiness < 20) setMessage("Bosen niki... Monggo kito ngglundung.");
-    else if (stats.energy < 20) setMessage("Sampun lungkrah... Kula ajeng tilem riyin.");
+    if (stats.hunger < 20) setMessage("Aku lapar... Tolong beri aku mineral.");
+    else if (stats.cleanliness < 20) setMessage("Badanku kotor... Tolong bersihkan agar mengkilap.");
+    else if (stats.happiness < 20) setMessage("Aku bosan... Mari berguling.");
+    else if (stats.energy < 20) setMessage("Sudah lelah... Aku ingin tidur dulu.");
   }, [stats.hunger, stats.cleanliness, stats.happiness, stats.energy]);
 
   const handleAction = (type: keyof typeof STAT_LABELS, amount: number, msg: string) => {
@@ -159,16 +159,16 @@ export default function App() {
   const toggleSleep = () => {
     if (isRolling) return;
     setIsSleeping(!isSleeping);
-    setMessage(!isSleeping ? "Pria Solo juga butuh istirahat... Zzz..." : "Sampun tangi! (Sudah bangun!) Siap melayani dengan sopan.");
+    setMessage(!isSleeping ? "Pria Solo juga butuh istirahat... Zzz..." : "Sudah bangun! Siap melayani dengan sopan.");
     if (!isSleeping) setIsHardened(false);
   };
 
   const resetGame = () => {
-    if (confirm("Reset Pria Solo? Sedaya data badhe ilang!")) {
+    if (confirm("Reset Pria Solo? Semua data akan hilang!")) {
       setStats(INITIAL_STATS);
       setIsSleeping(false);
       setIsHardened(false);
-      setMessage("Batu Pria Solo enggal sampun mriki.");
+      setMessage("Batu Pria Solo baru telah tiba.");
     }
   };
 
@@ -200,7 +200,7 @@ export default function App() {
         <div className="bg-white/30 backdrop-blur-md p-3 rounded-2xl border border-white/50 shadow-sm">
           <div className="flex justify-between items-center mb-1 text-[10px] font-black uppercase tracking-widest opacity-60">
             <span>Level {stats.level}</span>
-            <span>Wiwit Tumbuh ({Math.floor(stats.growth)}%)</span>
+            <span>Tahap Pertumbuhan ({Math.floor(stats.growth)}%)</span>
           </div>
           <div className="h-2 w-full bg-black/10 rounded-full overflow-hidden">
             <motion.div 
@@ -298,42 +298,42 @@ export default function App() {
         ${isSleeping ? 'bg-white/5' : 'bg-black/5'}
       `}>
         <ActionButton 
-          onClick={() => handleAction('hunger', 20, "Maturnuwun, mineralipun eco sanget.")} 
+          onClick={() => handleAction('hunger', 20, "Terima kasih, mineralnya sangat enak.")} 
           icon={<Beef size={24} />} 
-          label="Dahar" 
+          label="Makan" 
           color="bg-orange-500"
           isDark={isSleeping}
         />
         <ActionButton 
           onClick={handleRoll} 
           icon={<RefreshCcw size={24} />} 
-          label="Ngglundung" 
+          label="Guling" 
           color="bg-pink-500"
           isDark={isSleeping}
         />
         <ActionButton 
-          onClick={() => handleAction('cleanliness', 25, "Kinclong niki, matur suwun!")} 
+          onClick={() => handleAction('cleanliness', 25, "Bersih sekali, terima kasih!")} 
           icon={<Bath size={24} />} 
-          label="Siram" 
+          label="Mandi" 
           color="bg-cyan-500"
           isDark={isSleeping}
         />
          <ActionButton 
           onClick={handleHarden} 
           icon={<Shield size={24} />} 
-          label={isHardened ? "Lempoh" : "Kiyat"} 
+          label={isHardened ? "Lunak" : "Keras"} 
           color="bg-indigo-600"
           isDark={isSleeping}
         />
         <ActionButton 
           onClick={toggleSleep} 
           icon={isSleeping ? <Sun size={24} /> : <Moon size={24} />} 
-          label={isSleeping ? "Tangi" : "Tilem"} 
+          label={isSleeping ? "Bangun" : "Tidur"} 
           color={isSleeping ? "bg-amber-400" : "bg-indigo-600"}
           isDark={isSleeping}
         />
         <ActionButton 
-          onClick={() => setMessage("Kula batunipun saking kuto Solo yang penuh tata krama.")} 
+          onClick={() => setMessage("Aku batu dari kota Solo yang penuh tata krama.")} 
           icon={<Mountain size={24} />} 
           label="Solo" 
           color="bg-emerald-600"
