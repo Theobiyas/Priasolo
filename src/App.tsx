@@ -159,16 +159,16 @@ export default function App() {
   const toggleSleep = () => {
     if (isRolling) return;
     setIsSleeping(!isSleeping);
-    setMessage(!isSleeping ? "Pria Solo juga butuh istirahat... Zzz..." : "Sudah bangun! Siap melayani dengan sopan.");
+    setMessage(!isSleeping ? "Zahra juga butuh istirahat... Zzz..." : "Sudah bangun! Siap melayani dengan sopan.");
     if (!isSleeping) setIsHardened(false);
   };
 
   const resetGame = () => {
-    if (confirm("Reset Pria Solo? Semua data akan hilang!")) {
+    if (confirm("Reset Zahra? Semua data akan hilang!")) {
       setStats(INITIAL_STATS);
       setIsSleeping(false);
       setIsHardened(false);
-      setMessage("Batu Pria Solo baru telah tiba.");
+      setMessage("Batu Zahra telah tiba.");
     }
   };
 
